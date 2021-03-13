@@ -15,5 +15,10 @@ class Vendas extends Model
 							'data_da_venda',
 							'valor'];
 
-	protected $table = 'Vendas';						
+	protected $table = 'Vendas';		
+
+	public function cliente(){
+
+		return $this->belongsTo( Clientes::class, 'cliente_id');
+	}				
 }
