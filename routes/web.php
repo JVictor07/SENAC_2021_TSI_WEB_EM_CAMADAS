@@ -18,5 +18,10 @@ Route::get('/', function () {
 });
 
 Route::get('/avisos', function(){
-        return view('avisos');
+        return view('avisos', array('nome' => 'Bono', 	
+        							'mostrar' => true,
+        							'avisos' => array(	[	'id' => 1,
+        													'texto' => 'Feriados agora'],
+        												[	'id' => 2,
+        													'texto' => 'Feriado semana que vem'])));
 });
