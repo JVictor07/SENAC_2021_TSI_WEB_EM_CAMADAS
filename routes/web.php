@@ -25,3 +25,13 @@ Route::get('/avisos', function(){
         												[	'id' => 2,
         													'texto' => 'Feriado semana que vem'])));
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'clientes'], function (){
+
+	//Controlando o acesso com o middleware auth
+	Route::get('/listar',[App\Http\Controllers\ClientesController::class, 'listar'])->middleware('auth');
+});
