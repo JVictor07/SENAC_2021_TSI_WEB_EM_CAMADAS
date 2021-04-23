@@ -34,7 +34,7 @@ Route::get('/avisos', function(){
     ]);
 });
 
-Route::get('/vitrine', function(){
+Route::get('/vitrine', function() {
     return view('vitrine', [
         'produto' => [
             'price' => 200,
@@ -42,4 +42,14 @@ Route::get('/vitrine', function(){
             'image' => 'https://geekfanaticos.fbitsstatic.net/img/p/funko-pop-iron-man-i-am-iron-man-px-exclusive-580-avengers-endgame-vingadores-ultimato-marvel-71447/257932.jpg?w=540&h=540&v=no-change'
         ]
     ]);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'clientes'], function() {
+    // chama ClientesController na view 'listar'
+    Route::get('/listar',[App\Http\Controllers\ClientesController::class, 'listar'])->middleware('auth');
+    Route::get('/checkout',[App\Http\Controllers\CheckoutController::class, 'checkout'])->middleware('auth');
 });
