@@ -48,9 +48,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
-
-        return view('clientes.create', compact('roles'));
+        return view('clientes.create');
     }
 
     /**
@@ -67,9 +65,7 @@ class ClientesController extends Controller
 
         $input = $request->all();
 
-        $user = Clientes::create($input);
-
-        $user->assignRole( $request->input('roles'));
+        Clientes::create($input);
 
         return redirect()->route('clientes.index')->with('success','Cliente criado com sucesso');
     }
@@ -97,11 +93,7 @@ class ClientesController extends Controller
     {
         $cliente = Clientes::find($id);
 
-        $roles = Role::pluck('name', 'name')->all();
-
-        $clienteRole = $cliente->roles->pluck('name', 'name')->all();
-
-        return view('clientes.edit', compact('cliente', 'roles', 'clienteRole'));
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
