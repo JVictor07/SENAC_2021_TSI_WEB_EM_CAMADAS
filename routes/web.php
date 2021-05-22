@@ -18,38 +18,33 @@ Route::get('/', function () {
 });
 
 Route::get('/avisos', function(){
-    return view('avisos', [
-        'nome' => 'Joao',
-        'mostrar' => true,
-        'avisos' => [
-            [
-                'id' => 1,
-                'texto' => 'Feriados agora'
-            ],
-            [
-                'id' => 2,
-                'texto' => 'Feriado semana que vem'
-            ],
-        ]
-    ]);
-});
-
-Route::get('/vitrine', function() {
-    return view('vitrine', [
-        'produto' => [
-            'price' => 200,
-            'name' => 'Boneco fuko 1',
-            'image' => 'https://geekfanaticos.fbitsstatic.net/img/p/funko-pop-iron-man-i-am-iron-man-px-exclusive-580-avengers-endgame-vingadores-ultimato-marvel-71447/257932.jpg?w=540&h=540&v=no-change'
-        ]
-    ]);
+        return view('avisos', array('nome' => 'João',
+        							'mostrar' => true,
+        							'avisos' => array(	[	'id' => 1,
+        													'texto' => 'Feriados agora'],
+        												[	'id' => 2,
+        													'texto' => 'Feriado semana que vem'])));
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'clientes'], function() {
-    // chama ClientesController na view 'listar'
-    Route::get('/listar',[App\Http\Controllers\ClientesController::class, 'listar'])->middleware('auth');
-    Route::get('/checkout',[App\Http\Controllers\CheckoutController::class, 'checkout'])->middleware('auth');
+/*
+Route::group(['prefix' => 'clientes'], function (){
+
+	//Controlando o acesso com o middleware auth
+	//Route::get('/listar',[App\Http\Controllers\ClientesController::class, 'listar'])->middleware('auth');
+
+
+});
+*/
+Route::group(['middleware' => ['auth']], function(){
+	Route::resource('/clientes',App\Http\Controllers\ClientesController::class);
+});
+
+Route::group(['middleware' => ['auth']], function(){
+
+	Route::resource('/users',App\Http\Controllers\UserController::class);
+	Route::resource('/roles',App\Http\Controllers\RoleController::class);
 });
