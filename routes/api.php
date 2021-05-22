@@ -18,8 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', [App\Http\Controllers\APIController::class, 'login']);
 
-Route::prefix('v1')->group(static function(){
+Route::get('logout', [App\Http\Controllers\APIController::class, 'logout']);
+
+Route::group(['middleware' => 'auth.jwt','prefix' => 'v1'], function(){
 
 	Route::get(	'funcionarios', 
 					[App\Http\Controllers\FuncionarioController::class, 'index']);
