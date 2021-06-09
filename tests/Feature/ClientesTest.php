@@ -28,7 +28,7 @@ class ClientesTest extends TestCase
 
         //$this->markTestSkipped(); //Para evitar o teste
 
-        $cliente = Clientes::create([   'nome' => 'Isonequex', 
+        $cliente = Clientes::create([   'nome' => 'Isonequex',
                                         'email' => 'isonequex@senac.br',
                                         'endereco' => 'Av. Isosenac',
                                         'nascimento' => '1979-01-31']);
