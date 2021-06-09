@@ -13,7 +13,7 @@ class ClientesController extends Controller
     use HasFactory;
     use HasRoles;
 
-	
+
 	//Essa é uma forma de controlar o acesso
 	public function __construct()
 	{
@@ -36,7 +36,7 @@ class ClientesController extends Controller
 
         $data = Clientes::orderBy('id', 'DESC')->paginate($qtd_por_pagina);
 
-        return view('clientes.index', 
+        return view('clientes.index',
                 compact('data'))->
                     with('i', ($request->input('page', 1) - 1) * $qtd_por_pagina);
     }
@@ -48,9 +48,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
-
-        return view('clientes.create', compact('roles'));
+        return view('clientes.create');
     }
 
     /**
@@ -67,9 +65,7 @@ class ClientesController extends Controller
 
         $input = $request->all();
 
-        $user = Clientes::create($input);
-
-        $user->assignRole( $request->input('roles'));
+        Clientes::create($input);
 
         return redirect()->route('clientes.index')->with('success','Cliente criado com sucesso');
     }
@@ -97,11 +93,7 @@ class ClientesController extends Controller
     {
         $cliente = Clientes::find($id);
 
-        $roles = Role::pluck('name', 'name')->all();
-
-        $clienteRole = $cliente->roles->pluck('name', 'name')->all();
-
-        return view('clientes.edit', compact('cliente', 'roles', 'clienteRole'));
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
@@ -137,6 +129,6 @@ class ClientesController extends Controller
         Clientes::find($id)->delete();
 
         return redirect()->route('clientes.index')->with('success','Cliente removido com sucesso');
-    }    
+    }
 
 }

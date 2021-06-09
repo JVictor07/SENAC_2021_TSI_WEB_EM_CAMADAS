@@ -44,20 +44,6 @@
     <td>{{ $cliente->endereco }}</td>
     <td>{{ $cliente->nascimento }}</td>
     <td>
-
-      @if(!empty($cliente->getRoleNames()))
-
-        @foreach($cliente->getRoleNames() as $v)
-
-           <label class="badge badge-success">{{ $v }}</label>
-
-        @endforeach
-
-      @endif
-
-    </td>
-
-    <td>
        <a class="btn btn-info" href="{{ route('clientes.show',$cliente->id) }}">Mostrar</a>
        <a class="btn btn-primary" href="{{ route('clientes.edit',$cliente->id) }}">Editar</a>
 

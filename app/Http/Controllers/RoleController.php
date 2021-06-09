@@ -17,7 +17,7 @@ class RoleController extends Controller
         $this->middleware('permission:role-create', ['only' => ['create','store']]);
         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-    }    
+    }
 
     /**
      * Display a listing of the resource.
@@ -114,7 +114,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [ 'name' => 'required|unique:roles,name',
+        $this->validate($request, [ 'name' => 'required',
                                     'permission' => 'required']);
 
         $role = Role::find($id);
