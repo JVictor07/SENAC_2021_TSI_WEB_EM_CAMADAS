@@ -13,7 +13,6 @@ class ClientesController extends Controller
     use HasFactory;
     use HasRoles;
 
-
 	//Essa é uma forma de controlar o acesso
 	public function __construct()
 	{
@@ -60,6 +59,7 @@ class ClientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return view('clientes.create');
@@ -71,6 +71,7 @@ class ClientesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $this->validate($request,
@@ -117,6 +118,7 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         $this->validate($request,
@@ -138,10 +140,10 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         Clientes::find($id)->delete();
-
         return redirect()->route('clientes.index')->with('success','Cliente removido com sucesso');
     }
 
